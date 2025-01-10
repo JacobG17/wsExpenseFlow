@@ -1,11 +1,16 @@
 package main
 
 import (
+	"Api/wsExpenseFlow/internal/routes"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := gin.Default()
+	r := gin.Default()
 
-	router.Run("localhost:8080")
+	// Configurar las rutas
+	routes.SetUpRouter()
+ 	
+	r.Run("localhost:8080")
 }
