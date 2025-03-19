@@ -1,18 +1,26 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	"Api/wsExpenseFlow/internal/handlers"
+
+	"github.com/gin-gonic/gin"
 )
 
+// SetUpRouter configura las rutas de la API
 func SetUpRouter() *gin.Engine {
 	r := gin.Default()
 
-	// Path para endpoint's de "User"
+	// Grupo de rutas para usuarios
 	userGroup := r.Group("/user")
 	{
-		userGroup.POST("/singUP", handlers.PostSingUpHandler)
+		userGroup.POST("/sign-up", handlers.PostSignUpHandler) // Se descomenta si se usa
 	}
-	//Ruta para dar de alta un Usuario
+
+	// Grupo de rutas para transacciones
+	transactionGroup := r.Group("/transactions")
+	{
+		transactionGroup.POST("/new", handlers.PostNewTransaction) // Ruta más RESTful
+	}
+
 	return r
 }
