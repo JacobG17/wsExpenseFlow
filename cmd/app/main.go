@@ -15,5 +15,5 @@ func main() {
 	r := routes.SetUpRouter()
 
 	// Iniciar el servidor en el puerto 8080
-	r.Run("localhost:8080")
+	r.Run(":8080")
 }
