@@ -4,14 +4,25 @@ import (
 	"Api/wsExpenseFlow/internal/database"
 	"Api/wsExpenseFlow/internal/routes"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	// Cargar variables de entorno
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error al cargar el archivo .env")
+	// Obtener el directorio actual de trabajo
+	workDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal("Error al obtener el directorio de trabajo:", err)
+	}
+
+	// Obtener la ruta del directorio raíz del proyecto
+	projectRoot := filepath.Join(workDir, "../..")
+
+	// Cargar variables de entorno desde la raíz del proyecto
+	if err := godotenv.Load(filepath.Join(projectRoot, ".env")); err != nil {
+		log.Fatal("Error al cargar el archivo .env:", err)
 	}
 
 	// Abrir conexiones de base de datos
